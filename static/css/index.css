@@ -1,0 +1,22 @@
+.register-container {
+    width: 60%;
+    height: 30em;
+    position: relative;
+    left: 20%;
+    display: grid;
+    grid-template-columns: repeat(10, 10%);
+    box-shadow: 3px 5px 10px black;
+}
+
+.message_sign-in {
+    grid-column: 1/5;
+    grid-row: 1/11;
+    background-image: url("/static/images/Reg-online.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.form {
+    grid-column: 6/11;
+    grid-row: 2/11;
+}

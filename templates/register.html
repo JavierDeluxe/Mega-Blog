@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title%}
+    Register section
+{% endblock %}
+
+{% block content%}
+    <div class="register-container">
+        <div class="message_sign-in">
+        </div>
+
+        <div class="form">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% if form.errors %}
+                {% for field in field.errors%}
+                    {% for e in error %}
+                        <p>{{e}}</p>
+                    {% endfor %}
+                {% endfor %}
+                {% endif %}
+                {% for fields in form %}
+                    <p>{{ fields.label }}</p>
+                    <p>{{ fields}}</p>
+                {% endfor %}
+                <input type="submit">
+            </form>
+    </div>
+{% endblock %}
+
