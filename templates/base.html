@@ -23,20 +23,9 @@
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="/">Home</a>
               </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Sesion
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    {% if user.is_autheticated %}
-                  <li><a class="dropdown-item" href="#">log out</a></li>
-                  {% else %}
-                  <li><a class="dropdown-item" href="">Sign in</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="{% url 'articles:register' %}">Register</a></li>
-                  {% endif %}
-                </ul>
-              </li>
+              {% block session %}
+              
+              {% endblock %}
               {% if user.is_autheticated %}
               <li class="nav-item">
                 <a class="nav-link disabled">Create an article</a>

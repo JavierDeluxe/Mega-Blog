@@ -1,11 +1,15 @@
 from django.db import models
 from django.forms import CharField
 from django.contrib.auth.models import AbstractUser
+from django.urls import reverse
 
 
 class UserProfile(AbstractUser):
     photo = models.ImageField()
-
+    
+    def get_absolute_url(self):
+        return reverse("articles:index")
+    
 class Article(models.Model):
     title = models.CharField(max_length=1000)
     author_fk = models.ForeignKey(UserProfile, on_delete=models.CASCADE)

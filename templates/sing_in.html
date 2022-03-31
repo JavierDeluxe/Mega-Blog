@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block session %}
+    
+{% endblock %}
+
+
+{% block title %}
+Sign in 
+{% endblock %}
+
+{% block content %}
+    <div class="sign-in-container">
+        <form method="post">
+            {% csrf_token%}
+        <h1>Iniciar Sesión</h1>
+        {% if form.errors %}
+        {{ form.errors }}
+        {% endif %}
+                <br>
+                <p>Nombre de usuario</p>
+                {{form.username}}
+                <br>
+                <p>Contraseña</p>
+                {{form.password}}
+                <br><br>
+            <input type="submit" value="Iniciar sesión">
+            <input type="hidden" name="next" value="{{ next }}">
+        </form>
+    </div>
+{% endblock %}
