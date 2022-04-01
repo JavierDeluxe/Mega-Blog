@@ -14,9 +14,13 @@ class Article(models.Model):
     author_fk = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     open_mouths = models.CharField(max_length=100)
     text = models.CharField(max_length=1000)
-    image = models.ImageField()
-    date = models.DateField()
-    hearts = models.IntegerField()
+    image = models.FileField(null=True)
+    date = models.DateField(auto_now_add=True)
+    hearts = models.IntegerField(default=0)
+    
+    def get_absolute_url(self):
+        return reverse("articles:index")
+    
 
 class Comment(models.Model):
     author_fk = models.ForeignKey(UserProfile, on_delete=models.CASCADE)

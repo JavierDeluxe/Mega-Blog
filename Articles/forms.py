@@ -1,7 +1,5 @@
-from email.mime import image
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from django.views.generic.edit import CreateView
 from .models import Article, UserProfile
 
 
@@ -16,16 +14,10 @@ class ArticleForm(forms.ModelForm):
 
     class Meta():
         model = Article
-        fields = {
-            "author_fk",
+        fields = (
             "title",
+            "author_fk",
+            "open_mouths",
             "text",
             "image",
-        }
-
-        labels = {
-            "Autor: ": "author_fk",
-            "Titulo del articulo: ": "title",
-            "Contenido del articulo": "text",
-            "Imagen":"image"
-        }
+        )

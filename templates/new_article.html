@@ -7,15 +7,24 @@ Registrar articulo
 {% block content %}
     <div class="register-article">
         <div class="margen">
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          {{form.errors }}
+              {% if form.errors %}
+                    {{ form.errors }}
+                {% endif %}
             <div class="input-group flex-nowrap">
                 <span class="input-group-text" id="addon-wrapping">Autor</span>
                 <input type="text" name="author_fk" class="form-control" value="{{user.id}}" aria-label="Username" aria-describedby="addon-wrapping" readonly>
               </div>
               <br>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Titulo del articulo</span>
+                <input type="text" name="title" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+              </div>
         <div class="input-group mb-3">
-            <span class="input-group-text" id="inputGroup-sizing-default">Titulo del articulo</span>
-            <input type="text" name="title" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+            <span class="input-group-text" id="inputGroup-sizing-default">Abre bocas</span>
+            <input type="text" name="open_mouths" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
           </div>
           <div class="form-floating">
             <textarea class="form-control" name="text" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
@@ -23,7 +32,7 @@ Registrar articulo
           </div>
           <br>
           <div class="input-group mb-3">
-            <input name="image"type="file" class="form-control" id="inputGroupFile02">
+            <input id="id_image" name="image"type="file" class="form-control" id="inputGroupFile02">
             <label class="input-group-text" for="inputGroupFile02">Subir imagen</label>
           </div>
           <br>

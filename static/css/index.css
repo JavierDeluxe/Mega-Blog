@@ -48,3 +48,37 @@
     box-shadow: 2px 5px 10px black;
     text-align: center;
 }
+
+.article-container{
+    width: 90%;
+    height: 25em;
+    position: relative;
+    left: 5%;
+    display: grid;
+    grid-template-columns: repeat(10, 10%);
+    grid-template-rows: repeat(10, 10%);
+}
+
+.article-content{
+    grid-column: 1/8;
+    grid-row: 1/11;
+    box-shadow: 3px 5px 10px black;
+    display: grid;
+    grid-template-columns: repeat(10,10%);
+    grid-template-rows: repeat(10,10%);
+}
+
+.article-text{
+    grid-column: 4/11;
+    grid-row: 1/11;
+}
+
+.article-options{
+    grid-column: 7/11;
+    grid-row: 1/11;
+}
+
+.article-image{
+    grid-column: 1/4;
+    grid-row: 1/11;
+}

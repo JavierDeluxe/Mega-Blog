@@ -1,8 +1,24 @@
 {% extends "base.html" %}
 {% block title%}
-    Sign up
+    Ver articulo
 {% endblock%}
 
 {% block content%}
-
+    <div class="article-container">
+        <div class="article-content">
+            <div class="article-image">
+                <img src="/static/images{{article.image.url}}" class="card-img-top" alt="...">
+            </div>
+            <div class="article-text">
+                <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+                <h1>{{article.title}}</h1>
+                <h2>{{article.author_fk.username}}</h2>
+                <h2>Abre bocas: {{article.open_mouths}}</h2>
+                <h2>Texto: {{article.text}}</h2>
+            </div>
+        </div>
+            <div class="article-options">
+            </div>
+    </div>
 {% endblock %}
