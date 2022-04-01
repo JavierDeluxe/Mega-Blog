@@ -7,7 +7,9 @@ app_name = "articles"
 urlpatterns = [
     path("", index,name="index"),
     path("register", Register.as_view(),name="register"),
-    path("sing_in", Login.as_view(), name="login")
+    path("sing_in", Login.as_view(), name="login"),
+    path("logout",LogOut.as_view(), name="logout"),
+    path("registrar", RegisterArticle.as_view(),name="register-article")
 ]
 
 

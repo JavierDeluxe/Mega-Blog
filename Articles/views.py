@@ -1,9 +1,9 @@
 from django.shortcuts import redirect, render
 from .models import *
 from django.views.generic import CreateView
-from django.contrib.auth.views import LoginView
-from .forms import RegistroForm
-from django.contrib.auth import login, authenticate
+from django.contrib.auth.views import LoginView, LogoutView
+from .forms import ArticleForm, RegistroForm
+from django.contrib.auth import logout
 
 
 def index(request):
@@ -17,14 +17,14 @@ class Register(CreateView):
     
 class Login(LoginView):
     template_name = 'sing_in.html'
-    
-    def form_valid(self, form):
-        print("me cago en la puta")
-        usuario = form.cleaned_data.get('username')
-        password = form.cleaned_data.get('password1')
-        usuario = authenticate(username=usuario, password=password)
-        login(self.request, usuario)
-        return redirect('/')
 
+class LogOut(LogoutView):
+    pass
     
+class RegisterArticle(CreateView):
+    model = Article
+    template_name = "new_article.html"
+    form_class = ArticleForm
+    sucess_url = 'index'
+
 

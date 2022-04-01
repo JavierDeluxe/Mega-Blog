@@ -5,8 +5,9 @@
     left: 20%;
     display: grid;
     grid-template-columns: repeat(10, 10%);
-    box-shadow: 5px 5px 10px black;
+    box-shadow: 2px 5px 10px black;
 }
+
 .sing-in-container {
     width: 60%;
     height: 30em;
@@ -14,11 +15,10 @@
     left: 20%;
     display: grid;
     grid-template-columns: repeat(10, 10%);
-    box-shadow: 5px 5px 10px black;
+    box-shadow: 2px 5px 10px black;
 }
 
-
-.image_sign-up{
+.image_sign-up {
     grid-column: 1/5;
     grid-row: 2/11;
     background-image: url("/static/images/Reg-online.png");
@@ -31,11 +31,20 @@
     grid-row: 2/11;
 }
 
-.sign-in-container{
+.sign-in-container {
     text-align: center;
     width: 40%;
     height: 30em;
     position: relative;
     left: 30%;
     box-shadow: 3px 5px 10px black;
+}
+
+.register-article {
+    width: 70%;
+    height: 30em;
+    position: relative;
+    left: 15%;
+    box-shadow: 2px 5px 10px black;
+    text-align: center;
 }
