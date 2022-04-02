@@ -39,20 +39,16 @@
                     <img src="static/images{{article.image.url}}" class="card-img-top" alt="...">
                     <div class="card-body">
                       <h5 class="card-title">{{article.title}}</h5>
-                      <h6 class="card-subtitle mb-2 text-muted">{{article.author_fk}}</h6>
+                      <h6 class="card-subtitle mb-2 text-muted">De {{article.author_fk}}</h6>
                       <p class="card-text">{{article.open_mouths}}</p>
                     </div>
                     <ul class="list-group list-group-flush">
-                      <li class="list-group-item">Fecha: {{article.date}}</li>
-                      <li class="list-group-item">Hearts: {{article.hearts}}</li>
+                      <li class="list-group-item">Hearts: {{article.hearts_amount}}</li>
                     </ul>
                     <div class="card-body">
                       <a href=" {% url 'articles:watch_article' article.id %}">
                         <button type="button" class="btn btn-warning" style="margin-right: 2.5em;">Ver árticulo</button>
                       </a>
-                    <a>
-                      <button type="button" class="btn btn-outline-danger">Me gusta</button>
-                    </a>
                     </div>
               </div>
           </div>

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Editar articulo
+{% endblock %}
+
+{% block content%}
+<div class="register-article">
+<div class="margen">
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{form.errors }}
+      {% if form.errors %}
+            {{ form.errors }}
+        {% endif %}
+    <div class="input-group flex-nowrap">
+        <span class="input-group-text" id="addon-wrapping">Autor</span>
+        <input type="text" name="author_fk" class="form-control" value="{{user.id}}" aria-label="Username" aria-describedby="addon-wrapping" readonly>
+      </div>
+      <br>
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default">Titulo del articulo</span>
+        <input type="text" value="{{article.title}}"name="title" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+      </div>
+<div class="input-group mb-3">
+    <span class="input-group-text" id="inputGroup-sizing-default">Abre bocas</span>
+    <input type="text" value="{{article.open_mouths}}"n name="open_mouths" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+  </div>
+  <div class="form-floating">
+    <textarea class="form-control" value="{{article.text}}" name="text" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+    <label for="floatingTextarea2">Texto del articulo</label>
+  </div>
+  <br>
+  <div class="input-group mb-3">
+    <input id="id_image" name="image"type="file" class="form-control" id="inputGroupFile02">
+    <label class="input-group-text" for="inputGroupFile02">Subir imagen</label>
+  </div>
+  <br>
+  <button type="submit" class="btn btn-primary">Actualizar el articulo</button>
+</form>
+</div>
+</div>
+{% endblock %}
