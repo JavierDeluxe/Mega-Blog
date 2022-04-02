@@ -8,8 +8,7 @@ from django.contrib.auth import logout
 
 def index(request):
     articles = Article.objects.all()
-    article_rows = 3
-    return render(request, "index.html",{"articles":articles,"range":range(0,3)})
+    return render(request, "index.html",{"articles":articles})
 
 class Register(CreateView):
     model = UserProfile
