@@ -16,7 +16,7 @@ class Article(models.Model):
     text = models.CharField(max_length=1000)
     image = models.FileField(null=True)
     date = models.DateField(auto_now_add=True)
-    hearts = models.IntegerField(default=0)
+    hearts_amount = models.IntegerField(default=0)
     
     def get_absolute_url(self):
         return reverse("articles:index")
@@ -34,5 +34,4 @@ class Comment_second_level(models.Model):
 
 class Hearts(models.Model):
     author = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
-    comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
-    amount = models.IntegerField()
+    article = models.ForeignKey(Article, on_delete=models.CASCADE)

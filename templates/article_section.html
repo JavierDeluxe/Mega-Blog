@@ -1,24 +1,113 @@
 {% extends "base.html" %}
-{% block title%}
+{% block title %}
     Ver articulo
-{% endblock%}
+{% endblock %}
 
-{% block content%}
-    <div class="article-container">
-        <div class="article-content">
-            <div class="article-image">
-                <img src="/static/images{{article.image.url}}" class="card-img-top" alt="...">
+{% block content %}
+
+    <div class="article-container"> 
+        <div class="card mb-3 article-content" style="max-width: 100%;">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img src="/static/images{{article.image.url}}" class="img-fluid rounded-start" alt="...">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">{{article.title}}</h5>
+                  <br>
+                  <h6 class="card-text">Autor: {{article.author_fk}}</h6>
+                  <h6 class="card-text">Fecha: {{article.date}}</h6>
+                  <br><br>
+                  <p class="card-text">{{article.text}}</p>
+                  <br>
+                  <p class="card-text">Cantidad de hearts: {{article.hearts_amount}}</p>
+                </div>
+              </div>
             </div>
-            <div class="article-text">
-                <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
-                <h1>{{article.title}}</h1>
-                <h2>{{article.author_fk.username}}</h2>
-                <h2>Abre bocas: {{article.open_mouths}}</h2>
-                <h2>Texto: {{article.text}}</h2>
-            </div>
-        </div>
+          </div>
+          {% if user.is_authenticated %}
             <div class="article-options">
+              <div class="card" style="width: 100%;">
+                <ul class="list-group list-group-flush">
+                  {% if user.id == article.author_fk.id %}
+                  <li class="list-group-item">
+                    <a href="{% url 'articles:edit_article' article.id%}">
+                      <button type="button" class="btn btn-primary">Editar</button>
+                      <span>Editar el articulo</span>
+                    </a>
+                  </li>
+                  <li class="list-group-item">
+                    <a href="{% url 'articles:remove_article' article.id%}">
+                      <button type="button" class="btn btn-primary">Eliminar</button>
+                      <span>Elimina el articulo</span>
+                  </li>
+                  {% endif %}
+                  {% if not like %}
+                  <li class="list-group-item">
+                    <a href="{% url 'articles:like_article' article.id %}">
+                      <button type="button" class="btn btn-primary">Me gusta</button>
+                      <span>Darle me gusta al articulo</span>
+                    </a>
+                  </li>
+                  {% else %}
+                  <li class="list-group-item">
+                    <a href="{% url 'articles:dislike_article' article.id %}">
+                      <button type="button" class="btn btn-primary">Ya no me gusta</button>
+                      <span>Quitarle el me gusta al articulo</span>
+                    </a>
+                  </li>
+                  {% endif %}
+                </ul>
+              </div>
+          {% endif %}
             </div>
-    </div>
+          </div>
+          <div class="comment-container">
+            <form method="post" action="{% url 'articles:comment_article' article.id %}">
+              {% csrf_token %}
+              {% if user.is_authenticated %}
+              <div class="comment-text">
+                <textarea class="form-control" name="text" placeholder="Deja un comentario aquí" id="floatingTextarea2" style="height: 100px"></textarea>
+                <button type="submit" class="btn btn-primary">Comentar</button>
+              </div>
+            {% else %}
+              <div class="comment-text">
+                <textarea class="form-control" readonly name="text" placeholder="Deja un comentario aquí" id="floatingTextarea2" style="height: 100px">No puedes comentar debido a que no estas logueado</textarea>
+              </div>
+            {% endif %}
+          </div>
+        </form>
+          <br> <br>
+          <div class="container">
+            {% for comment in comments %}
+            <div class="row">
+              <div class="col">
+                <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
+                  <div class="card-header">Comentario hecho por: {{comment.author_fk}}</div>
+                  <div class="card-body">
+                    <h5 class="card-title"> {{comment.text}} </h5>
+                    <p class="card-text">Hecho el día:  {{comment.publicacion_fk.date|date:'Y-m-d'}}</p>
+                    {% for sub_comment in sub_comments %}
+                    {% if sub_comment.comentario_fk.id == comment.id %}
+                    <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
+                      <div class="card-header">Header</div>
+                      <div class="card-body">
+                        <h5 class="card-title">Light card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      </div>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                  </div>
+                </div>
+                <form method="post">
+                  {% csrf_token %}
+                  <textarea class="form-control" name="text-comment" placeholder="Subcomenta este comentario un comentario aquí" id="floatingTextarea2" style="height: 50px"></textarea>
+                  <button type="submit" class="btn btn-primary" style="float:right">Comentar</button>
+                  <br>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+    
 {% endblock %}

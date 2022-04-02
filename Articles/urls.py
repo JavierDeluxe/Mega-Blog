@@ -10,7 +10,13 @@ urlpatterns = [
     path("sing_in", Login.as_view(), name="login"),
     path("logout",LogOut.as_view(), name="logout"),
     path("registrar", RegisterArticle.as_view(),name="register-article"),
-    path("ver_articulo/<int:id>",watch_articulo, name="watch_article")
+    path("ver_articulo/<int:id>",watch_articulo, name="watch_article"),
+    path("<int:id>/editar_articulo/",edit_article,name="edit_article"),
+    path("<int:id>/eliminar_articulo/",remove_article,name="remove_article"),
+    path("<int:id>/like_articulo/",like_article,name="like_article"),
+    path("<int:id>/dislike_articulo/",dislike_article,name="dislike_article"),
+    path("<int:id>/comment_article/",comment_article,name="comment_article"),
+    path("<int:id>/subcomment_article",sub_comment,name="subcomment"),
 ]
 
 

@@ -1,3 +1,8 @@
+a {
+    list-style: none;
+    text-decoration: none !important;
+}
+
 .register-container {
     width: 60%;
     height: 30em;
@@ -49,7 +54,7 @@
     text-align: center;
 }
 
-.article-container{
+.article-container {
     width: 90%;
     height: 25em;
     position: relative;
@@ -59,26 +64,25 @@
     grid-template-rows: repeat(10, 10%);
 }
 
-.article-content{
+.article-content {
     grid-column: 1/8;
     grid-row: 1/11;
-    box-shadow: 3px 5px 10px black;
-    display: grid;
-    grid-template-columns: repeat(10,10%);
-    grid-template-rows: repeat(10,10%);
 }
 
-.article-text{
+.article-text {
     grid-column: 4/11;
     grid-row: 1/11;
 }
 
-.article-options{
-    grid-column: 7/11;
+.article-options {
+    grid-column: 8/11;
     grid-row: 1/11;
 }
 
-.article-image{
-    grid-column: 1/4;
-    grid-row: 1/11;
+.comment-container {
+    width: 40%;
+    height: 8em;
+    position: relative;
+    left: 5%;
+    text-align: right;
 }
