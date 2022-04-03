@@ -41,7 +41,7 @@
                     <img src="/static/images/{{article.image.url}}" class="card-img-top" alt="...">
                     <div class="card-body">
                       <h5 class="card-title">{{article.title}}</h5>
-                      <img style="width: 3rem; margin:1em;" src="/static/images/{{user.photo}}">
+                      <img style="width: 3rem; margin:1em;" src="/static/images/{{article.author_fk.photo}}">
                       <h6 class="card-subtitle mb-2 text-muted">De {{article.author_fk}}</h6>
                       <p class="card-text">{{article.open_mouths}}</p>
                     </div>

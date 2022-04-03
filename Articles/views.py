@@ -117,10 +117,69 @@ def sub_comment(request,id):
     id = comment.publicacion_fk.id
     return watch_articulo(request,id)
 
-def like_comment(request,id_comment):
-    
+def like_comment(request,id,id2,id3):
+    user = request.user
+    comment = None
+    if id3 == 0:
+        reaction = Reactions_comments_1.objects.filter(Q(Q(user=user) & Q(comment=comment)))
+        comment = Comment.objects.get(pk=id2)
+        react_Like(user,reaction,comment,id3)
+    elif id3 == 1:
+        comment = Comment_second_level.objects.get(pk=id2)
+        reaction = Reactions_comments_2.objects.filter(Q(Q(user=user) & Q(comment=comment)))
+        react_Like(user,reaction,comment,id3)
+        
     return watch_articulo(request,id)
 
-def dislike_comment(request,id_comment):
+def react_Like(user, reaction, comment,id3):
+    if len(reaction) == 0:
+        if id3 == 0:
+            reaction = Reactions_comments_1(user=user,comment=comment,like=True,dislike=False)
+        elif id3==1:
+            reaction = Reactions_comments_2(user=user,comment=comment,like=True,dislike=False)
+        comment.likes = comment.likes+1
+        reaction.save()
+        comment.save()
+    else:
+        reaction = reaction[0]
+        if(reaction.dislike == True):
+            reaction.like = True
+            reaction.dislike = False
+            comment.likes = comment.likes+1
+            comment.dislikes = comment.dislikes-1
+            comment.save()
+            reaction.save()
+
+def dislike_comment(request,id,id2,id3):
+    user = request.user
+    comment = None
+    reaction = Reactions_comments_1.objects.filter(Q(Q(user=user) & Q(comment=comment)))
+    if id3 == 0:
+        reaction = Reactions_comments_1.objects.filter(Q(Q(user=user) & Q(comment=comment)))
+        comment = Comment.objects.get(pk=id2)
+        react_dislike(user,reaction,comment,id3)
+    elif id3 == 1:
+        comment = Comment_second_level.objects.get(pk=id2)
+        reaction = Reactions_comments_2.objects.filter(Q(Q(user=user) & Q(comment=comment)))
+        react_dislike(user,reaction,comment,id3)
     return watch_articulo(request,id)
+
+def react_dislike(user, reaction, comment,id3):
+    if len(reaction) == 0:
+        if id3 == 0:
+            reaction = Reactions_comments_1(user=user,comment=comment,like=False,dislike=True)
+        elif id3==1:
+            reaction = Reactions_comments_2(user=user,comment=comment,like=False,dislike=True)
+        comment.likes = comment.likes-1
+        reaction.save()
+        comment.save()
+    else:
+        reaction = reaction[0]
+        if(reaction.dislike == False):
+            reaction.like = False
+            reaction.dislike = True
+            comment.likes = comment.likes-1
+            comment.dislikes = comment.dislikes+1
+            comment.save()
+            reaction.save()
     

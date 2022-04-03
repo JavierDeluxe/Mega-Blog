@@ -42,3 +42,15 @@ class Comment_second_level(models.Model):
 class Hearts(models.Model):
     author = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     article = models.ForeignKey(Article, on_delete=models.CASCADE)
+    
+class Reactions_comments_1(models.Model):
+    user = models.ForeignKey(UserProfile,on_delete=models.CASCADE)
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
+    like = models.BooleanField()
+    dislike = models.BooleanField()
+    
+class Reactions_comments_2(models.Model):
+    user = models.ForeignKey(UserProfile,on_delete=models.CASCADE)
+    comment = models.ForeignKey(Comment_second_level, on_delete=models.CASCADE)
+    like = models.BooleanField()
+    dislike = models.BooleanField()

@@ -81,12 +81,15 @@
                 <div class="card text-dark bg-light mb-3" style="max-width: 25rem;">
                   <div class="card-header">{{comment.author_fk}} - {{comment.date}}</div>
                   <div class="card-body">
-                    
                     <p class="card-title"> {{comment.text}} </p>
                     <label>{{comment.likes}}&nbsp</label>
+                    <a href="{% url 'articles:like_comment' id=article.id id2=comment.id id3=0 %}">
                     <button type="button" class="btn btn-warning">Like</button>
+                    </a>
                     <label>&nbsp{{comment.dislikes}}&nbsp</label>
-                    <button type="button" class="btn btn-danger">Dislike</button>
+                    <a href="{% url 'articles:dislike_comment' id=article.id id2=comment.id id3=0 %}">
+                      <button type="button" class="btn btn-danger">Dislike</button>
+                    </a>
                   </div>
                 </div>
                     {% for sub_comment in sub_comments %}
@@ -96,9 +99,13 @@
                       <div class="card-body">
                         <p class="card-text">{{sub_comment.text}}</p>
                         <label>{{sub_comment.likes}}&nbsp</label>
-                      <button type="button" class="btn btn-warning">Like</button>
-                      <label>&nbsp{{sub_comment.dislikes}}&nbsp</label>
-                      <button type="button" class="btn btn-danger">Dislike</button>
+                        <a href="{% url 'articles:like_comment' id=article.id id2=comment.id id3=1 %}">
+                          <button type="button" class="btn btn-warning">Like</button>      
+                        </a>              
+                        <label>&nbsp{{sub_comment.dislikes}}&nbsp</label>
+                        <a href="{% url 'articles:dislike_comment' id=article.id id2=comment.id id3=1 %}">
+                          <button type="button" class="btn btn-danger">Dislike</button>
+                        </a>
                       </div>
                     </div>
                     {% endif %}
@@ -107,8 +114,8 @@
                 <form method="post" action="{% url 'articles:subcomment' comment.id %}">
                   {% csrf_token %}
                   <div style="margin-left:25em">
-                    <textarea class="form-control" name="text-comment" placeholder="Subcomenta este comentario un comentario aquí" id="floatingTextarea2" style="height: 50px"></textarea>
-                    <button type="submit" class="btn btn-primary" style="float:right">Comentar</button>
+                    <textarea class="form-control" name="text-comment" placeholder="Subcomenta este comentario con un comentario aquí" id="floatingTextarea2" style="height: 50px"></textarea>
+                      <button type="submit" class="btn btn-primary" style="float:right">Comentar</button>
                   </div>
                 </form>
                 {% endif %}
