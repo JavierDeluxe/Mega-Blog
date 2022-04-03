@@ -1,4 +1,4 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import render
 from .models import *
 from django.views.generic import CreateView
 from django.contrib.auth.views import LoginView, LogoutView
@@ -116,3 +116,11 @@ def sub_comment(request,id):
         sub_comment.save()
     id = comment.publicacion_fk.id
     return watch_articulo(request,id)
+
+def like_comment(request,id_comment):
+    
+    return watch_articulo(request,id)
+
+def dislike_comment(request,id_comment):
+    return watch_articulo(request,id)
+    

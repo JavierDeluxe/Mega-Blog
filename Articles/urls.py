@@ -17,7 +17,9 @@ urlpatterns = [
     path("<int:id>/dislike/",dislike_article,name="dislike_article"),
     path("<int:id>/comment/",comment_article,name="comment_article"),
     path("<int:id>/subcomment_article",sub_comment,name="subcomment"),
-    path("my_articles/",my_articles,name="my_articles")
+    path("my_articles/",my_articles,name="my_articles"),
+    path("like_comment/<int:id>",like_comment,name="like_comment"),
+    path("dislike_comment/<int:id>",dislike_comment,name="dislike_comment"),
 ]
 
 

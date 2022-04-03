@@ -19,8 +19,6 @@
                   <h6 class="card-text">Fecha: {{article.date}}</h6>
                   <br><br>
                   <p class="card-text">{{article.text}}</p>
-                  <br>
-                  <p class="card-text">Cantidad de hearts: {{article.hearts_amount}}</p>
                 </div>
               </div>
             </div>
@@ -32,28 +30,26 @@
                   {% if user.id == article.author_fk.id %}
                   <li class="list-group-item">
                     <a href="{% url 'articles:edit_article' article.id%}">
-                      <button type="button" class="btn btn-primary">Editar</button>
-                      <span>Editar el articulo</span>
+                      <button type="button" class="btn btn-primary">&nbsp &nbsp Editar &nbsp &nbsp</button>
                     </a>
                   </li>
                   <li class="list-group-item">
                     <a href="{% url 'articles:remove_article' article.id%}">
-                      <button type="button" class="btn btn-primary">Eliminar</button>
-                      <span>Elimina el articulo</span>
+                      <button type="button" class="btn btn-primary">&nbsp Eliminar &nbsp</button>
                   </li>
                   {% endif %}
                   {% if not like %}
                   <li class="list-group-item">
                     <a href="{% url 'articles:like_article' article.id %}">
-                      <button type="button" class="btn btn-primary">Me gusta</button>
-                      <span>Darle me gusta al articulo</span>
+                      <label>&nbsp{{article.hearts_amount}} &nbsp</label>
+                      <button type="button" class="btn btn-primary"> Me gusta &nbsp</button>
                     </a>
                   </li>
                   {% else %}
                   <li class="list-group-item">
                     <a href="{% url 'articles:dislike_article' article.id %}">
+                      <label>&nbsp{{article.hearts_amount}} &nbsp</label>
                       <button type="button" class="btn btn-primary">Ya no me gusta</button>
-                      <span>Quitarle el me gusta al articulo</span>
                     </a>
                   </li>
                   {% endif %}
@@ -82,22 +78,27 @@
             {% for comment in comments %}
             <div class="row">
               <div class="col">
-                <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
+                <div class="card text-dark bg-light mb-3" style="max-width: 25rem;">
                   <div class="card-header">{{comment.author_fk}} - {{comment.date}}</div>
                   <div class="card-body">
+                    
                     <p class="card-title"> {{comment.text}} </p>
-                  <button type="button" class="btn btn-warning">Like</button>
-                  <button type="button" class="btn btn-primary">Dislike</button>
+                    <label>{{comment.likes}}&nbsp</label>
+                    <button type="button" class="btn btn-warning">Like</button>
+                    <label>&nbsp{{comment.dislikes}}&nbsp</label>
+                    <button type="button" class="btn btn-danger">Dislike</button>
                   </div>
                 </div>
                     {% for sub_comment in sub_comments %}
                     {% if sub_comment.comentario_fk.id == comment.id %}
-                    <div class="card text-dark bg-light mb-3" style="max-width: 18em; margin-left:20em">
+                    <div class="card text-dark bg-light mb-3" style="max-width: 25rem; margin-left:25em">
                       <div class="card-header">{{sub_comment.author_fk}} - {{sub_comment.date}}</div>
                       <div class="card-body">
                         <p class="card-text">{{sub_comment.text}}</p>
+                        <label>{{sub_comment.likes}}&nbsp</label>
                       <button type="button" class="btn btn-warning">Like</button>
-                      <button type="button" class="btn btn-primary">Dislike</button>
+                      <label>&nbsp{{sub_comment.dislikes}}&nbsp</label>
+                      <button type="button" class="btn btn-danger">Dislike</button>
                       </div>
                     </div>
                     {% endif %}
@@ -105,7 +106,7 @@
                 {% if user.is_authenticated %}
                 <form method="post" action="{% url 'articles:subcomment' comment.id %}">
                   {% csrf_token %}
-                  <div style="margin-left:20em">
+                  <div style="margin-left:25em">
                     <textarea class="form-control" name="text-comment" placeholder="Subcomenta este comentario un comentario aquí" id="floatingTextarea2" style="height: 50px"></textarea>
                     <button type="submit" class="btn btn-primary" style="float:right">Comentar</button>
                   </div>

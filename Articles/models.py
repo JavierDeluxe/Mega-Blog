@@ -27,6 +27,8 @@ class Comment(models.Model):
     text = models.CharField(max_length=1000)
     publicacion_fk = models.ForeignKey(Article, on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True)
+    likes = models.IntegerField(default=0)
+    dislikes = models.IntegerField(default=0)
 
 class Comment_second_level(models.Model):
     author_fk = models.ForeignKey(UserProfile,on_delete=models.CASCADE)
@@ -34,6 +36,8 @@ class Comment_second_level(models.Model):
     comentario_fk = models.ForeignKey(Comment, on_delete=models.CASCADE)
     article_fk= models.ForeignKey(Article, on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True)
+    likes = models.IntegerField(default=0)
+    dislikes = models.IntegerField(default=0)
 
 class Hearts(models.Model):
     author = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
