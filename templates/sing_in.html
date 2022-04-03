@@ -14,6 +14,7 @@ Sign in
     <div class="sign-in-container">
         <form method="post">
             {% csrf_token%}
+            <br>
         <h1>Iniciar Sesión</h1>
         {% if form.errors %}
         {{ form.errors }}
@@ -21,10 +22,10 @@ Sign in
                 <br>
                 <p>Nombre de usuario</p>
                 {{form.username}}
-                <br>
+                <br> <br>
                 <p>Contraseña</p>
                 {{form.password}}
-                <br><br>
+                <br><br><br>
             <input type="submit" value="Iniciar sesión">
         </form>
     </div>

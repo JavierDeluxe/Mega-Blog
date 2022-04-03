@@ -13,10 +13,11 @@ urlpatterns = [
     path("ver_articulo/<int:id>",watch_articulo, name="watch_article"),
     path("<int:id>/editar_articulo/",edit_article,name="edit_article"),
     path("<int:id>/eliminar_articulo/",remove_article,name="remove_article"),
-    path("<int:id>/like_articulo/",like_article,name="like_article"),
-    path("<int:id>/dislike_articulo/",dislike_article,name="dislike_article"),
-    path("<int:id>/comment_article/",comment_article,name="comment_article"),
+    path("<int:id>/like/",like_article,name="like_article"),
+    path("<int:id>/dislike/",dislike_article,name="dislike_article"),
+    path("<int:id>/comment/",comment_article,name="comment_article"),
     path("<int:id>/subcomment_article",sub_comment,name="subcomment"),
+    path("my_articles/",my_articles,name="my_articles")
 ]
 
 

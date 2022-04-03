@@ -12,7 +12,9 @@
     {{ user.username }}
   </a>
   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-    <li><a class="dropdown-item" href="{% url 'articles:logout' %}">log out</a></li>
+    <li><a class="dropdown-item" href="{% url 'articles:my_articles' %}">Ver mis articulos</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><a class="dropdown-item" href="{% url 'articles:logout' %}">Cerrar sesión</a></li>
   </ul>
   <li class="nav-item">
     <a class="nav-link" href="{% url 'articles:register-article' %}">Registrar articulo</a>
@@ -36,7 +38,7 @@
           {% for article in articles %} 
               <div class="col-md-auto">
                 <div class="card" style="width: 18rem; margin:1em;">
-                    <img src="static/images{{article.image.url}}" class="card-img-top" alt="...">
+                    <img src="/static/images{{article.image.url}}" class="card-img-top" alt="...">
                     <div class="card-body">
                       <h5 class="card-title">{{article.title}}</h5>
                       <h6 class="card-subtitle mb-2 text-muted">De {{article.author_fk}}</h6>

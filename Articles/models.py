@@ -14,8 +14,8 @@ class Article(models.Model):
     author_fk = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     open_mouths = models.CharField(max_length=100)
     text = models.CharField(max_length=1000)
-    image = models.FileField(null=True)
-    date = models.DateField(auto_now_add=True)
+    image = models.ImageField(null=True)
+    date = models.DateTimeField(auto_now_add=True)
     hearts_amount = models.IntegerField(default=0)
     
     def get_absolute_url(self):
@@ -26,11 +26,14 @@ class Comment(models.Model):
     author_fk = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     text = models.CharField(max_length=1000)
     publicacion_fk = models.ForeignKey(Article, on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now_add=True)
 
 class Comment_second_level(models.Model):
     author_fk = models.ForeignKey(UserProfile,on_delete=models.CASCADE)
     text = models.CharField(max_length=1000)
     comentario_fk = models.ForeignKey(Comment, on_delete=models.CASCADE)
+    article_fk= models.ForeignKey(Article, on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now_add=True)
 
 class Hearts(models.Model):
     author = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
