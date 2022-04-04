@@ -103,7 +103,7 @@
                     {% if sub_comment.comentario_fk.id == comment.id %}
                     <div class="card text-dark bg-light mb-3" style="max-width: 25rem; margin-left:25em">
                       <div class="card-header">
-                        <img src="/static/images/{{comment.author_fk.photo}}" style="width: 2em">&nbsp
+                        <img src="/static/images/{{sub_comment.author_fk.photo}}" style="width: 2em">&nbsp
                         {{sub_comment.author_fk}} - {{sub_comment.date}}</div>
                       <div class="card-body">
                         <p class="card-text">{{sub_comment.text}}</p>

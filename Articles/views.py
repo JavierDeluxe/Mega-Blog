@@ -5,11 +5,27 @@ from django.contrib.auth.views import LoginView, LogoutView
 from .forms import ArticleForm, RegistroForm
 from django.contrib.auth import logout
 from django.db.models import Q
+import datetime
 
 
 def index(request):
-    articles = Article.objects.all()
-    return render(request, "index.html",{"articles":articles,"range":range(0,3)})
+    articles = Article.objects.all().order_by('-id')
+    times_difference = time_difference(articles)
+    return render(request, "index.html",{"articles":articles,"times":times_difference})
+
+def time_difference(articles):
+    times = []
+    time_now = datetime.datetime.now()
+    print(time_now)
+    for i in articles:
+        date = i.date
+        print("Fecha actual", time_now)
+        print("FEcha de creación", i.date)
+        new_date = datetime.datetime(date.year,date.month,date.day,(date.hour-5),date.minute,date.second)
+        ti = time_now - new_date
+        times.insert(0,ti)
+    return times
+        
 
 class Register(CreateView):
     model = UserProfile
