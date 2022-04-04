@@ -34,7 +34,6 @@ def watch_articulo(request, id):
     sub_comments = Comment_second_level.objects.filter(article_fk=id)
     article = Article.objects.get(pk=id)
     like = user_gave_like(request,id)
-    print(sub_comments)
     return render(request,"article_section.html",{"article": article,"like":like,"comments":comments,"sub_comments":sub_comments})
 
 def my_articles(request):
@@ -119,16 +118,14 @@ def sub_comment(request,id):
 
 def like_comment(request,id,id2,id3):
     user = request.user
-    comment = None
     if id3 == 0:
-        reaction = Reactions_comments_1.objects.filter(Q(Q(user=user) & Q(comment=comment)))
         comment = Comment.objects.get(pk=id2)
+        reaction = Reactions_comments_1.objects.filter(Q(Q(user=user) & Q(comment=comment)))
         react_Like(user,reaction,comment,id3)
     elif id3 == 1:
         comment = Comment_second_level.objects.get(pk=id2)
         reaction = Reactions_comments_2.objects.filter(Q(Q(user=user) & Q(comment=comment)))
         react_Like(user,reaction,comment,id3)
-        
     return watch_articulo(request,id)
 
 def react_Like(user, reaction, comment,id3):
@@ -152,9 +149,8 @@ def react_Like(user, reaction, comment,id3):
 
 def dislike_comment(request,id,id2,id3):
     user = request.user
-    comment = None
-    reaction = Reactions_comments_1.objects.filter(Q(Q(user=user) & Q(comment=comment)))
     if id3 == 0:
+        comment = Comment.objects.get(pk=id2)
         reaction = Reactions_comments_1.objects.filter(Q(Q(user=user) & Q(comment=comment)))
         comment = Comment.objects.get(pk=id2)
         react_dislike(user,reaction,comment,id3)
@@ -170,7 +166,7 @@ def react_dislike(user, reaction, comment,id3):
             reaction = Reactions_comments_1(user=user,comment=comment,like=False,dislike=True)
         elif id3==1:
             reaction = Reactions_comments_2(user=user,comment=comment,like=False,dislike=True)
-        comment.likes = comment.likes-1
+        comment.dislikes = comment.dislikes+1
         reaction.save()
         comment.save()
     else:

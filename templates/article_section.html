@@ -79,33 +79,47 @@
             <div class="row">
               <div class="col">
                 <div class="card text-dark bg-light mb-3" style="max-width: 25rem;">
-                  <div class="card-header">{{comment.author_fk}} - {{comment.date}}</div>
+                  <div class="card-header">
+                    <img src="/static/images/{{comment.author_fk.photo}}" style="width: 2em">&nbsp
+                     {{comment.author_fk}} - {{comment.date}}</div>
                   <div class="card-body">
                     <p class="card-title"> {{comment.text}} </p>
-                    <label>{{comment.likes}}&nbsp</label>
-                    <a href="{% url 'articles:like_comment' id=article.id id2=comment.id id3=0 %}">
-                    <button type="button" class="btn btn-warning">Like</button>
-                    </a>
-                    <label>&nbsp{{comment.dislikes}}&nbsp</label>
-                    <a href="{% url 'articles:dislike_comment' id=article.id id2=comment.id id3=0 %}">
-                      <button type="button" class="btn btn-danger">Dislike</button>
-                    </a>
+                    {% if user.is_authenticated%}
+                      <label>{{comment.likes}}&nbsp</label>
+                      <a href="{% url 'articles:like_comment' id=article.id id2=comment.id id3=0 %}">
+                        <button type="button" class="btn btn-warning">Like</button>
+                      </a>
+                      <label>&nbsp{{comment.dislikes}}&nbsp</label>
+                      <a href="{% url 'articles:dislike_comment' id=article.id id2=comment.id id3=0 %}">
+                        <button type="button" class="btn btn-danger">Dislike</button>
+                      </a>
+                      {% else %}
+                      <label>Likes: {{comment.likes}}&nbsp</label>
+                      <label>Dislikes: &nbsp{{comment.dislikes}}&nbsp</label>
+                      {% endif %}
                   </div>
                 </div>
                     {% for sub_comment in sub_comments %}
                     {% if sub_comment.comentario_fk.id == comment.id %}
                     <div class="card text-dark bg-light mb-3" style="max-width: 25rem; margin-left:25em">
-                      <div class="card-header">{{sub_comment.author_fk}} - {{sub_comment.date}}</div>
+                      <div class="card-header">
+                        <img src="/static/images/{{comment.author_fk.photo}}" style="width: 2em">&nbsp
+                        {{sub_comment.author_fk}} - {{sub_comment.date}}</div>
                       <div class="card-body">
                         <p class="card-text">{{sub_comment.text}}</p>
+                        {% if user.is_authenticated %}
                         <label>{{sub_comment.likes}}&nbsp</label>
-                        <a href="{% url 'articles:like_comment' id=article.id id2=comment.id id3=1 %}">
-                          <button type="button" class="btn btn-warning">Like</button>      
-                        </a>              
-                        <label>&nbsp{{sub_comment.dislikes}}&nbsp</label>
-                        <a href="{% url 'articles:dislike_comment' id=article.id id2=comment.id id3=1 %}">
-                          <button type="button" class="btn btn-danger">Dislike</button>
-                        </a>
+                          <a href="{% url 'articles:like_comment' id=article.id id2=sub_comment.id id3=1 %}">
+                            <button type="button" class="btn btn-warning">Like</button>      
+                          </a>              
+                          <label>&nbsp{{sub_comment.dislikes}}&nbsp</label>
+                          <a href="{% url 'articles:dislike_comment' id=article.id id2=sub_comment.id id3=1 %}">
+                            <button type="button" class="btn btn-danger">Dislike</button>
+                          </a>
+                          {% else %}
+                          <label>Likes: {{sub_comment.likes}}&nbsp</label>
+                          <label>Dislikes: &nbsp{{sub_comment.dislikes}}&nbsp</label>
+                          {% endif %}
                       </div>
                     </div>
                     {% endif %}
